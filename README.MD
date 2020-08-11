@@ -9,7 +9,7 @@
 - Support for three checksum algorithms: MD5, SHA1, SHA256.
 - Shows checksums of the file.
 
-<span style="color:red">**Warning! The program is under active development and may malfunction or malfunction!**</span>.
+**Warning! The program is under active development and may malfunction or malfunction!**
 
 ### Compilation:
 
@@ -19,7 +19,7 @@
         
 ### Usage example:
 
-*Open the file with "thashw" or run in "SHELL": 
+**Open the file with "thashw" or run in "SHELL":**
     
     thashw filename
     
