@@ -22,5 +22,15 @@
 **Open the file with "thashw" or run in "SHELL":**
     
     thashw filename
-    
+
+### My plans
+
+- Add copy to clipboard. 
+- Add an input line to compare checksums. 
+- Fix the window size.
+- Increase font size.
+
+
+
+
    
