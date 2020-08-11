@@ -9,7 +9,7 @@
 - Support for three checksum algorithms: MD5, SHA1, SHA256.
 - Shows checksums of the file.
 
-**Warning! The program is under active development and may malfunction or malfunction!**
+**Warning! The program is in active development. It has limited functionality and may not work correctly!**
 
 ### Compilation:
 
