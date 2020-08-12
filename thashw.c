@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "TCC/INCLUDE/kos32sys1.h"
-#include "TCC/INCLUDE/KOS/INPUTBOX.H"
+#include "kos32sys1.h"
 #include <string.h>
 #include <stdarg.h>
 #include "algorithms/md5.h"
