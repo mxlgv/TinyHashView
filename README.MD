@@ -23,12 +23,15 @@
     
     thashview filename
 
-### My plans
+### Whats is done
 
-- Add copy to clipboard. 
+- The interface has been changed and corrected. 
+- Added copy function.
+
+### My plans
+ 
 - Add an input line to compare checksums. 
-- Fix the window size.
-- Increase font size.
+
 
 
 
