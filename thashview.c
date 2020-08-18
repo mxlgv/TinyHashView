@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "apis/kos32sys.h"
-#include "apis/errorbox.c"
+#include "apis/msgbox.h"
 #include <string.h>
 #include <stdarg.h>
 #include "algorithms/md5.h"
 #include "algorithms/sha1.h"
 #include "algorithms/sha256.h"
-
 
 #define GREEN 0x00067D06
 #define MAX_HASH_LEN 128
@@ -114,9 +113,10 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size)
 
 void redraw_window()
 {
+    pos_t win_pos = get_mouse_pos(0);
     sprintf(title,"%s - thashview", filename);
     begin_draw();
-    sys_create_window(50, 50, 665, 120, title, 0xFFFFFFFF, 0x14);
+    sys_create_window(win_pos.x, win_pos.y, 665, 120, title, 0xFFFFFFFF, 0x14);
 
     define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN);
     define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);
@@ -230,7 +230,6 @@ int main(int argc, char** argv)
             }
         }
     }while(1);
-
 }
 
 
