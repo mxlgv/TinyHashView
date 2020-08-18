@@ -15,7 +15,7 @@
 
 **To compile under Kolibri OS, use TCC or run the script: "build_kex.sh" to auto-build.**
 
-    tcc algorithms/md5.c algorithms/sha1.c algorithms/sha256.c thashview.c -o thashview -lck
+    tcc algorithms/md5.c algorithms/sha1.c apis/msgbox.c algorithms/sha256.c thashview.c -o thashview -lck
         
 ### Usage example:
 
