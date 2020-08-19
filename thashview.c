@@ -29,11 +29,26 @@ enum BUTTONS
     BTN_COPY_SHA256=31
 };
 
+void* safe_malloc(size_t size)
+{
+    void *p=malloc(size);
+    if(p==NULL)
+    {
+        error_box("Memory allocation error!");
+        exit(0);
+    }
+    else
+    {
+        return p;
+    }
+}
+
+
 void md5_hash(FILE* input, BYTE* hash )
 {
     int input_size;
     BYTE *temp_buffer;
-    temp_buffer=malloc(1024);
+    temp_buffer=safe_malloc(1024);
     MD5_CTX ctx;
     md5_init(&ctx);
     while((input_size = fread(temp_buffer, 1, 1024, input)) > 0){
@@ -47,7 +62,7 @@ void sha1_hash(FILE* input, BYTE* hash )
 {
     int input_size;
     BYTE *buffer;
-    buffer=malloc(1024);
+    buffer=safe_malloc(1024);
     SHA1_CTX ctx;
     sha1_init(&ctx);
     while((input_size = fread(buffer, 1, 1024, input)) > 0){
@@ -61,7 +76,7 @@ void sha256_hash(FILE* input, BYTE* hash )
 {
     int input_size;
     BYTE *buffer;
-    buffer=malloc(1024);
+    buffer=safe_malloc(1024);
     SHA256_CTX ctx;
     sha256_init(&ctx);
     while((input_size = fread(buffer, 1, 1024, input)) > 0){
@@ -77,7 +92,7 @@ BYTE* check_sum(char *in_file_name, int alg)
     FILE* input_file;
     BYTE *hash;
     input_file=fopen(in_file_name,"rb");
-    hash = malloc(alg);
+    hash = safe_malloc(alg);
     switch (alg)
     {
         case MD5_BLOCK_SIZE :
@@ -99,7 +114,7 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size)
 {
     char block[2];
     char *temp_str;
-    temp_str=malloc(MAX_HASH_LEN);
+    temp_str=safe_malloc(MAX_HASH_LEN);
     for(int i=0; i<hash_size; i++)
     {
         sprintf(block,"%02x", hash[i]);
@@ -114,7 +129,7 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size)
 void redraw_window()
 {
     pos_t win_pos = get_mouse_pos(0);
-    sprintf(title,"%s - thashview", filename);
+    sprintf(title,"%s - thashview 1.1", filename);
     begin_draw();
     sys_create_window(win_pos.x, win_pos.y, 665, 120, title, 0xFFFFFFFF, 0x14);
 
