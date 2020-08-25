@@ -1,18 +1,18 @@
 .text
 0x24 .text
-0x9FAD .bss
+0x9F51 .bss
 0x1A1 start
 0x1A1 _start
 0x39B2 main
-0x9FAD __argc
-0xA431 __argv
-0xA031 __path
+0x9F51 __argc
+0xA3D5 __argv
+0x9FD5 __path
 0x24 
 0x2E1 md5_transform
 0x12A0 md5_init
 0x130C md5_update
 0x13CF md5_final
-0x5794 memset
+0x573C memset
 0x24 
 0x1801 sha1_transform
 0x1C68 sha1_init
@@ -21,275 +21,273 @@
 0x24 
 0x2222 draw_error_box
 0x2453 get_mouse_pos
-0x5768 memmove
+0x5710 memmove
 0x238A begin_draw
 0x23BC sys_create_window
-0x9559 L.8
+0x9501 L.8
 0x2423 draw_text_sys
 0x23A3 end_draw
 0x22B3 error_box
 0x24CA set_event_mask
 0x248D get_os_event
 0x24AA get_os_button
-0x5A10 exit
+0x59B8 exit
 0x24 
-0x9561 k
+0x9509 k
 0x24EC sha256_transform
 0x2933 sha256_init
 0x29DF sha256_update
 0x2AA2 sha256_final
 0x24 
-0xA831 sys_color_table
-0x9661 hex
-0x9678 hash_str_md5
-0x96B9 hash_str_sha1
-0x96FA hash_str_sha256
-0xA859 edit_box_buff
-0xA89A filename
-0xAC9A title
-0x973D str_pos
-0x9741 md5_flag
-0x9745 sha1_flag
-0x9749 sha256_flag
-0x974D edit_box_text_color
+0xA7D5 sys_color_table
+0x9609 hex
+0x9620 hash_str_md5
+0x9661 hash_str_sha1
+0x96A2 hash_str_sha256
+0xA7FD edit_box_buff
+0xA83E filename
+0xAC3E title
+0x96E5 str_pos
+0x96E9 md5_flag
+0x96ED sha1_flag
+0x96F1 sha256_flag
+0x96F5 edit_box_text_color
 0x2F8B edit_box
-0x5804 strchr
+0x57AC strchr
 0x303A safe_malloc
-0x474C wtmalloc
-0x9751 L.12
+0x46F4 wtmalloc
+0x96F9 L.12
 0x3089 md5_hash
-0x4264 fread
-0x4BAF wtfree
+0x4240 fread
+0x4B57 wtfree
 0x310B sha1_hash
 0x318D sha256_hash
 0x320F check_sum
-0x976A L.13
-0x3F94 fopen
-0x3F0C fclose
+0x9712 L.13
+0x3F70 fopen
+0x3EE8 fclose
 0x32E6 sprint_hash
-0x976D L.14
-0x471C sprintf
-0x57AC strcat
+0x9715 L.14
+0x46C4 sprintf
+0x5754 strcat
 0x336B redraw_window
-0x3DF3 get_mouse_pos
-0x9772 L.15
-0x3CCF begin_draw
-0x3D01 sys_create_window
-0x3D8A draw_bar
-0x3DC3 draw_text_sys
-0x3D68 define_button
-0x9785 L.16
-0x978A L.17
-0x9790 L.18
-0x9798 L.19
-0x979D L.20
-0x97A2 L.21
-0x97A7 L.22
-0x97AF L.23
-0x3CE8 end_draw
+0x3DD2 get_mouse_pos
+0x971A L.15
+0x3CAE begin_draw
+0x3CE0 sys_create_window
+0x3D69 draw_bar
+0x3DA2 draw_text_sys
+0x3D47 define_button
+0x972D L.16
+0x9732 L.17
+0x9738 L.18
+0x9740 L.19
+0x9745 L.20
+0x974A L.21
+0x974F L.22
+0x9757 L.23
+0x3CC7 end_draw
 0x3739 copy_to_clipboard
-0x5954 strlen
-0x58C4 strcpy
-0x3E9C kol_clip_set
+0x58FC strlen
+0x586C strcpy
+0x3E7B kol_clip_set
 0x3799 print_pending_calc
-0x97B5 L.24
+0x975D L.24
 0x37BB calc_and_cmp
-0x5850 strcmp
+0x57F8 strcmp
 0x3821 hash_compare
-0x97ED L.25
-0x97FF L.26
-0x9802 L.27
-0x3EC6 get_system_colors
-0x3EE7 set_event_mask
-0x3E2D get_os_event
-0x3E4A get_key
-0x46E8 puts
-0x3E7C get_os_button
-0x9815 errno
-0x5900 strdup
-0x55C4 _ksys_get_filesize
-0x574C memcpy
-0x561C _ksys_readfile
-0x9819 L.0
-0x5C33 con_init_console_dll
-0xB0D9 con_write_asciiz
-0x7855 format_print
-0x9825 __freebase
-0x9829 __freetop
-0x982D __firstfree
-0xB0A5 wtalloc_stat
-0x9831 L.3
-0x985A L.4
-0x986D L.5
-0x986F L.6
-0x98A4 L.7
-0x98D6 L.8
-0x98E9 L.9
-0x98EB L.10
-0x991B L.11
-0x992E L.12
-0x9930 L.13
-0x9964 L.14
-0x9994 L.15
-0x99D9 L.16
-0x99E2 L.17
-0x99E4 L.18
-0x9A18 L.19
-0x9A3C L.20
-0x9A61 L.21
-0x9A88 L.22
-0x9A91 L.23
-0x9AB6 L.24
-0x9ADD L.25
-0x981D c_used
-0x9821 c_free
-0x5594 debug_out_str
-0x5990 __assert_func
-0x8640 sysmalloc
-0x5002 wtrealloc
-0x51C2 wtcalloc
-0x5212 wtmalloc_freelist_check
-0x5336 wtmalloc_freelist_print
-0x53BF wtmalloc_poiner_check
-0x5420 wtdump_alloc_stats
-0x5578 .text
-0x5578 _ksys_debug_out
-0x55C4 .text
-0x566C _ksys_rewritefile
-0x56B8 _ksys_appendtofile
-0x574C .text
-0x5794 .text
-0x9B05 L.2
-0x9B2D L.3
-0x8610 snprintf
-0x59D6 __trace_func
-0xB0C9 __console_initdll_status
-0xB0D1 con_exit
-0x86E8 _ksys_exit
-0x9B51 L.0
-0x9B61 L.1
-0x9BD1 L.2
-0x9BD7 L.3
-0x9BDF L.4
-0x9BE8 L.5
-0x9BF9 L.6
-0x9C0A L.7
-0x9C15 L.8
-0x9C1E L.9
-0x9C2C L.10
-0x9C3A L.11
-0x9C44 L.12
-0x9C4E L.13
-0x9C59 L.14
-0x9C62 L.15
-0x9C6C L.16
-0x9C80 L.17
-0x9C96 L.18
-0x9CAC L.19
-0x9CB4 L.20
-0x9CC7 L.21
-0x9CDA L.22
-0x9CE8 L.23
-0x9B4D con_caption
-0xB0C5 con_dll_ver
-0x9B5D con_dllname
-0xB0CD con_init
-0xB0D5 con_set_title
-0xB0DD con_write_string
-0xB0E1 con_printf
-0xB0E5 con_get_flags
-0xB0E9 con_set_flags
-0xB0ED con_get_font_height
-0xB0F1 con_get_cursor_height
-0xB0F5 con_set_cursor_height
-0xB0F9 con_getch
-0xB0FD con_getch2
-0xB101 con_kbhit
-0xB105 con_gets
-0xB109 con_gets2
-0xB10D con_cls
-0xB111 con_get_cursor_pos
-0xB115 con_set_cursor_pos
-0x9B79 con_imports
-0x5A48 con_lib_link
-0x86A6 _ksys_cofflib_getproc
-0x5C6A con_init_console_dll_param
-0x8690 _ksys_cofflib_load
-0x9CF9 L.1
-0x9CFE L.2
-0x9D03 L.3
-0x9D08 L.4
-0x9D0D L.5
-0x9D15 L.6
-0x9D1D L.7
-0x9D25 L.8
-0x9D2D L.9
-0x9D35 L.10
-0x9D3D L.11
-0x9D45 L.12
-0x9D4D L.13
-0x9D55 L.14
-0x9D5D L.15
-0x9D65 L.16
-0x9D81 L.17
-0x9D89 L.18
-0x9D91 L.19
-0x9DA6 L.20
-0x9DB7 L.21
-0x9DCE L.22
-0x9DFB L.23
-0x9E2B L.24
-0x5D00 formatted_double_special
-0x5DE6 copy_and_align
-0x60B1 formatted_double_to_string_scientific
-0x62DA formatted_double_to_string
-0x6A34 formatted_long_to_string
-0x8750 floor
-0x8AA2 __divdi3
-0x8E82 __tcc_cvt_ftol
-0x94C8 roundl
-0x6F11 formatted_hex_to_string
-0x8C95 __udivdi3
-0x7447 formatted_octa_to_string
-0x9E51 __is
-0x86F0 strncpy
-0x8640 .text
-0x8658 sysfree
-0x8670 sysrealloc
+0x9795 L.25
+0x97A7 L.26
+0x97AA L.27
+0x3EA5 get_system_colors
+0x3EC6 set_event_mask
+0x3E0C get_os_event
+0x3E29 get_key
+0x3E5B get_os_button
+0x97BD errno
+0x58A8 strdup
+0x556C _ksys_get_filesize
+0x56F4 memcpy
+0x55C4 _ksys_readfile
+0x77FD format_print
+0x97C9 __freebase
+0x97CD __freetop
+0x97D1 __firstfree
+0xB049 wtalloc_stat
+0x97D5 L.3
+0x97FE L.4
+0x9811 L.5
+0x9813 L.6
+0x9848 L.7
+0x987A L.8
+0x988D L.9
+0x988F L.10
+0x98BF L.11
+0x98D2 L.12
+0x98D4 L.13
+0x9908 L.14
+0x9938 L.15
+0x997D L.16
+0x9986 L.17
+0x9988 L.18
+0x99BC L.19
+0x99E0 L.20
+0x9A05 L.21
+0x9A2C L.22
+0x9A35 L.23
+0x9A5A L.24
+0x9A81 L.25
+0x97C1 c_used
+0x97C5 c_free
+0x553C debug_out_str
+0x5938 __assert_func
+0x85E8 sysmalloc
+0x4FAA wtrealloc
+0x516A wtcalloc
+0x51BA wtmalloc_freelist_check
+0x52DE wtmalloc_freelist_print
+0x5367 wtmalloc_poiner_check
+0x53C8 wtdump_alloc_stats
+0x5520 .text
+0x5520 _ksys_debug_out
+0x556C .text
+0x5614 _ksys_rewritefile
+0x5660 _ksys_appendtofile
+0x56F4 .text
+0x573C .text
+0x9AA9 L.2
+0x9AD1 L.3
+0x85B8 snprintf
+0x597E __trace_func
+0xB06D __console_initdll_status
+0xB075 con_exit
+0x8690 _ksys_exit
+0x9AF5 L.0
+0x9B05 L.1
+0x9B75 L.2
+0x9B7B L.3
+0x9B83 L.4
+0x9B8C L.5
+0x9B9D L.6
+0x9BAE L.7
+0x9BB9 L.8
+0x9BC2 L.9
+0x9BD0 L.10
+0x9BDE L.11
+0x9BE8 L.12
+0x9BF2 L.13
+0x9BFD L.14
+0x9C06 L.15
+0x9C10 L.16
+0x9C24 L.17
+0x9C3A L.18
+0x9C50 L.19
+0x9C58 L.20
+0x9C6B L.21
+0x9C7E L.22
+0x9C8C L.23
+0x9AF1 con_caption
+0xB069 con_dll_ver
+0x9B01 con_dllname
+0xB071 con_init
+0xB079 con_set_title
+0xB07D con_write_asciiz
+0xB081 con_write_string
+0xB085 con_printf
+0xB089 con_get_flags
+0xB08D con_set_flags
+0xB091 con_get_font_height
+0xB095 con_get_cursor_height
+0xB099 con_set_cursor_height
+0xB09D con_getch
+0xB0A1 con_getch2
+0xB0A5 con_kbhit
+0xB0A9 con_gets
+0xB0AD con_gets2
+0xB0B1 con_cls
+0xB0B5 con_get_cursor_pos
+0xB0B9 con_set_cursor_pos
+0x9B1D con_imports
+0x59F0 con_lib_link
+0x864E _ksys_cofflib_getproc
+0x5BDB con_init_console_dll
+0x5C12 con_init_console_dll_param
+0x8638 _ksys_cofflib_load
+0x9C9D L.1
+0x9CA2 L.2
+0x9CA7 L.3
+0x9CAC L.4
+0x9CB1 L.5
+0x9CB9 L.6
+0x9CC1 L.7
+0x9CC9 L.8
+0x9CD1 L.9
+0x9CD9 L.10
+0x9CE1 L.11
+0x9CE9 L.12
+0x9CF1 L.13
+0x9CF9 L.14
+0x9D01 L.15
+0x9D09 L.16
+0x9D25 L.17
+0x9D2D L.18
+0x9D35 L.19
+0x9D4A L.20
+0x9D5B L.21
+0x9D72 L.22
+0x9D9F L.23
+0x9DCF L.24
+0x5CA8 formatted_double_special
+0x5D8E copy_and_align
+0x6059 formatted_double_to_string_scientific
+0x6282 formatted_double_to_string
+0x69DC formatted_long_to_string
+0x86F8 floor
+0x8A4A __divdi3
+0x8E2A __tcc_cvt_ftol
+0x9470 roundl
+0x6EB9 formatted_hex_to_string
+0x8C3D __udivdi3
+0x73EF formatted_octa_to_string
+0x9DF5 __is
+0x8698 strncpy
+0x85E8 .text
+0x8600 sysfree
+0x8618 sysrealloc
+0x8638 .text
 0x8690 .text
-0x86E8 .text
-0x86E8 _ksys_exit@0
-0x8750 .text
-0x877C __udivmoddi4
-0x9F55 L.3
-0x9F5D L.4
-0x9F65 L.5
-0x9F6D L.6
-0x9F71 L.7
-0x9F75 L.8
-0x9F7D L.9
-0x9F85 L.10
-0x9F8D L.11
-0x8BA4 __moddi3
-0x8CC3 __umoddi3
-0x8CF5 __ashrdi3
-0x8D7A __lshrdi3
-0x8DFE __ashldi3
-0x8EB0 __floatundisf
-0x8F14 __floatundidf
-0x8F78 __floatundixf
-0x8FDC __fixunssfdi
-0x90CA __fixunsdfdi
-0x91F4 __fixunsxfdi
-0x92CB __fixsfdi
-0x9371 __fixdfdi
-0x9417 __fixxfdi
-0x94BD __clear_cache
-0x9F95 L.0
-0x9F9D L.1
-0x9FA5 L.2
-0x9530 ceil
-0x9530 .text
+0x8690 _ksys_exit@0
+0x86F8 .text
+0x8724 __udivmoddi4
+0x9EF9 L.3
+0x9F01 L.4
+0x9F09 L.5
+0x9F11 L.6
+0x9F15 L.7
+0x9F19 L.8
+0x9F21 L.9
+0x9F29 L.10
+0x9F31 L.11
+0x8B4C __moddi3
+0x8C6B __umoddi3
+0x8C9D __ashrdi3
+0x8D22 __lshrdi3
+0x8DA6 __ashldi3
+0x8E58 __floatundisf
+0x8EBC __floatundidf
+0x8F20 __floatundixf
+0x8F84 __fixunssfdi
+0x9072 __fixunsdfdi
+0x919C __fixunsxfdi
+0x9273 __fixsfdi
+0x9319 __fixdfdi
+0x93BF __fixxfdi
+0x9465 __clear_cache
+0x9F39 L.0
+0x9F41 L.1
+0x9F49 L.2
+0x94D8 ceil
+0x94D8 .text
 .text source code links
 0x2EA         WORD a, b, c, d, m[16], i, j;            // MD5 specifies big endian by
 0x31D                 m[i] = (data[j]) + (data[j + 1] << 8) + (data[j + 2] << 16) + (
@@ -747,7 +745,7 @@
 0x33BB     sys_create_window(win_pos.x, win_pos.y, 665, 160, title, 0xFFFFFFFF, 0x14);
 0x33EB       draw_bar(10, 121, 525,20, 0x802C8C8C8); // Создаём прямоуг�
 0x3411     draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); /
-0x343E        define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Оп
+0x343E       define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Оп�
 0x345E     define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// Опр�
 0x347E     define_button((10 << 16) + 60, (90 << 16) + 20, BTN_SHA256, GREEN);// Оп�
 0x349E       draw_text_sys("MD5:", 15, 34, 0,   0x90000000 | sys_color_table.work_butt
@@ -778,27 +776,29 @@
 0x37C4    print_pending_calc(hash_str_universal);  
 0x37D0    sprint_hash(check_sum(alg),hash_str_universal, alg);  
 0x37ED    return !strcmp(edit_box_buff, hash_str_universal);  
-0x3843    int alg=strlen(edit_box_buff)/2;     if(md5_flag) //Если уже вычи
-0x3852     {  
-0x3852         return !strcmp(edit_box_buff,hash_str_md5);  
-0x388B     }      else if(sha1_flag)  
-0x389A     {  
-0x389A         return !strcmp(edit_box_buff,hash_str_sha1);  
-0x38D3     }      else if(sha256_flag)  
-0x38E2     {  
-0x38E2         return !strcmp(edit_box_buff, hash_str_sha256);  
-0x391B     }      else      {  
-0x391B         switch (alg) // Если вычисления ещё небыло  
-0x3923         {  
-0x3923         case MD5_BLOCK_SIZE:  
-0x3931             return calc_and_cmp(hash_str_md5,alg);  
-0x3948         break;  
-0x394D           case SHA1_BLOCK_SIZE:  
-0x395B             return calc_and_cmp(hash_str_sha1,alg);  
-0x3972         break;  
-0x3977           case SHA256_BLOCK_SIZE:  
-0x3985             return calc_and_cmp(hash_str_sha256,alg);  
-0x399C         break;  
+0x3843    int alg=strlen(edit_box_buff)/2;            switch (alg) // Если выч�
+0x384B         {  
+0x384B         case MD5_BLOCK_SIZE:  
+0x3859             if(md5_flag)  
+0x3868             {  
+0x3868                 return !strcmp(edit_box_buff,hash_str_md5);  
+0x38A1             }              else              {  
+0x38A1                 return calc_and_cmp(hash_str_md5,alg);  
+0x38B8             }          break;  
+0x38BD           case SHA1_BLOCK_SIZE:  
+0x38CB             if(sha1_flag)  
+0x38DA             {  
+0x38DA                 return !strcmp(edit_box_buff,hash_str_sha1);  
+0x3913             }              else              {  
+0x3913                 return calc_and_cmp(hash_str_sha1,alg);  
+0x392A             }          break;  
+0x392F           case SHA256_BLOCK_SIZE:  
+0x393D               if(sha256_flag)  
+0x394C             {  
+0x394C                 return !strcmp(edit_box_buff,hash_str_sha256);  
+0x3985             }              else              {  
+0x3985                 return calc_and_cmp(hash_str_sha256,alg);  
+0x399C             }          break;  
 0x39A1           default:  
 0x39A1             return FALSE;  
 0x39AB         break;  
@@ -826,63 +826,60 @@
 0x3A96         case KOLIBRI_EVENT_KEY:  
 0x3AA4             edit_box(get_key()); // Получаем нажатую клави�
 0x3AD0             redraw_window();  
-0x3AD5             puts(edit_box_buff);  
-0x3AE3             break;  
-0x3AE8         case KOLIBRI_EVENT_BUTTON: // Событие обработки кно�
-0x3AF6             pressed_button = get_os_button(); // Получение кода н
-0x3AFE             switch (pressed_button) // Проверка какая кнопка
-0x3B06             {  
-0x3B06                 case BTN_MD5:  
-0x3B14                     print_pending_calc(hash_str_md5);  
-0x3B22                     sprint_hash(check_sum(MD5_BLOCK_SIZE),hash_str_md5, MD5_BLO
-0x3B45                     redraw_window();  
-0x3B4A                 break;  
-0x3B4F                   case BTN_SHA1:  
-0x3B5D                     print_pending_calc(hash_str_sha1);  
-0x3B6B                     sprint_hash(check_sum(SHA1_BLOCK_SIZE),hash_str_sha1, SHA1_
-0x3B8E                     redraw_window();  
-0x3B93                 break;  
-0x3B98                   case BTN_SHA256:  
-0x3BA6                     print_pending_calc(hash_str_sha256);  
-0x3BB4                     sprint_hash(check_sum(SHA256_BLOCK_SIZE),hash_str_sha256, S
-0x3BD7                     redraw_window();  
-0x3BDC                 break;  
-0x3BE1                   case BTN_COPY_MD5:  
-0x3BEF                     redraw_window();  
-0x3BF4                     copy_to_clipboard(hash_str_md5);  
-0x3C02                 break;  
-0x3C07                   case BTN_COPY_SHA1:  
-0x3C15                     redraw_window();  
-0x3C1A                     copy_to_clipboard(hash_str_sha1);  
-0x3C28                 break;  
-0x3C2D                   case BTN_COPY_SHA256:  
-0x3C3B                     redraw_window();  
-0x3C40                     copy_to_clipboard(hash_str_sha256);  
-0x3C4E                 break;  
-0x3C53                   case BTN_PASTE:  
-0x3C61                    /* paste_to_edit_buffer();                      redraw_windo
-0x3C66                                   case BTN_CMP:  
-0x3C74                 if(hash_compare())  
-0x3C82                 {  
-0x3C82                     edit_box_text_color=GREEN; // Устанавливаем т
-0x3C92                 }                  else                  {  
-0x3C92                     edit_box_text_color=RED; // Устанавливаем те
-0x3C9D                 }                  redraw_window();  
+0x3AD5             break;  
+0x3ADA         case KOLIBRI_EVENT_BUTTON: // Событие обработки кно�
+0x3AE8             pressed_button = get_os_button(); // Получение кода н
+0x3AF0             switch (pressed_button) // Проверка какая кнопка
+0x3AF8             {  
+0x3AF8                 case BTN_MD5:  
+0x3B06                     print_pending_calc(hash_str_md5);  
+0x3B14                     sprint_hash(check_sum(MD5_BLOCK_SIZE),hash_str_md5, MD5_BLO
+0x3B37                     redraw_window();  
+0x3B3C                 break;  
+0x3B41                   case BTN_SHA1:  
+0x3B4F                     print_pending_calc(hash_str_sha1);  
+0x3B5D                     sprint_hash(check_sum(SHA1_BLOCK_SIZE),hash_str_sha1, SHA1_
+0x3B80                     redraw_window();  
+0x3B85                 break;  
+0x3B8A                   case BTN_SHA256:  
+0x3B98                     print_pending_calc(hash_str_sha256);  
+0x3BA6                     sprint_hash(check_sum(SHA256_BLOCK_SIZE),hash_str_sha256, S
+0x3BC9                     redraw_window();  
+0x3BCE                 break;  
+0x3BD3                   case BTN_COPY_MD5:  
+0x3BE1                     redraw_window();  
+0x3BE6                     copy_to_clipboard(hash_str_md5);  
+0x3BF4                 break;  
+0x3BF9                   case BTN_COPY_SHA1:  
+0x3C07                     redraw_window();  
+0x3C0C                     copy_to_clipboard(hash_str_sha1);  
+0x3C1A                 break;  
+0x3C1F                   case BTN_COPY_SHA256:  
+0x3C2D                     redraw_window();  
+0x3C32                     copy_to_clipboard(hash_str_sha256);  
+0x3C40                 break;  
+0x3C45                 /*                  case BTN_PASTE:                      paste_
+0x3C53                 if(hash_compare())  
+0x3C61                 {  
+0x3C61                     edit_box_text_color=GREEN; // Устанавливаем т
+0x3C71                 }                  else                  {  
+0x3C71                     edit_box_text_color=RED; // Устанавливаем те
+0x3C7C                 }                  redraw_window();  
+0x3C81                 break;  
+0x3C86                   case BTN_QUIT:  
+0x3C94                     exit(0);  
 0x3CA2                 break;  
-0x3CA7                   case BTN_QUIT:  
-0x3CB5                     exit(0);  
-0x3CC3                 break;  
 0x2393 
 0x23AC 
 0x23C5 
-0x3D71 
-0x3D93 
+0x3D50 
+0x3D72 
 0x242C 
 0x245C 
 0x246E 
 0x2496 
 0x24A0 
-0x3E53 
-0x3E5D 
+0x3E32 
+0x3E3C 
 0x24B3 
 0x24BD 

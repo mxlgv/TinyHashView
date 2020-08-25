@@ -8,7 +8,7 @@
 #include "algorithms/sha1.h"
 #include "algorithms/sha256.h"
 
-#define TRUE 1; 
+#define TRUE 1;
 #define FALSE 0;
 #define MAX_HASH_LEN 65 // Максимальная длина строкию
 
@@ -31,12 +31,12 @@ enum MYCOLORS // Цвета
 };
 
 unsigned int str_pos=0; // Позиция курсора при пичати в строке ввода
-int md5_flag=0, sha1_flag=0, sha256_flag=0; // Флаги показывающие был ли уже рассчитана котрольная сумма в функции check_sum() 
+int md5_flag=0, sha1_flag=0, sha256_flag=0; // Флаги показывающие был ли уже рассчитана котрольная сумма в функции check_sum()
 int edit_box_text_color=BLACK; // Изначальный цвет текста в строке ввода
 
 enum MYKEYS // Коды клавиш
 {
-    BACKSPACE=8 
+    BACKSPACE=8
 };
 
 enum BUTTONS // Кнопки в интрефейсе
@@ -45,7 +45,7 @@ enum BUTTONS // Кнопки в интрефейсе
     BTN_MD5 = 10,      //Рассчитать md5-контрольную сумму
     BTN_SHA1 = 20,     //Рассчитать sha1-контрольную сумму
     BTN_SHA256 = 30,   //Рассчитать sha256-контрольную сумму
-    BTN_COPY_MD5= 11,  //Скопировать в буффер обмена 
+    BTN_COPY_MD5= 11,  //Скопировать в буффер обмена
     BTN_COPY_SHA1= 21,
     BTN_COPY_SHA256=31,
     BTN_CMP=40,        //Сравнить edit_box и контрольную сумму
@@ -86,7 +86,7 @@ void* safe_malloc(size_t size) // Безопасный malloc. Вызывает 
 }
 
 /* Функции генерации контрольных сумм */
-void md5_hash(FILE* input, BYTE* hash ) 
+void md5_hash(FILE* input, BYTE* hash )
 {
     int input_size;
     BYTE *temp_buffer;
@@ -156,7 +156,7 @@ BYTE* check_sum(int alg) // Генерируем контрольные сумм
     return hash;
 }
 
-void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауем двоичные данные из hash в строку hash_str 
+void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауем двоичные данные из hash в строку hash_str
 {
     char block[2];
     memset(hash_str, 0, MAX_HASH_LEN); // Очищаем строку для strcat
@@ -177,10 +177,10 @@ void redraw_window() //Рисуем окно
 
     draw_bar(10, 121, 525,20, 0x802C8C8C8); // Создаём прямоугольник для поля ввода
     draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // Выводим текст из буффера ввода
- 
-    define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Определяем кнопку md5 
-    define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// Определяем кнопку sha1 
-    define_button((10 << 16) + 60, (90 << 16) + 20, BTN_SHA256, GREEN);// Определяем кнопку sha256 
+
+    define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Определяем кнопку md5
+    define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// Определяем кнопку sha1
+    define_button((10 << 16) + 60, (90 << 16) + 20, BTN_SHA256, GREEN);// Определяем кнопку sha256
 
     draw_text_sys("MD5:", 15, 34, 0,   0x90000000 | sys_color_table.work_button_text); // Пищем текст на кнопках
     draw_text_sys("SHA1:", 15, 64, 0,  0x90000000 | sys_color_table.work_button_text);
@@ -247,39 +247,47 @@ bool calc_and_cmp(char *hash_str_universal,int alg) // Вычисляем кон
 bool hash_compare() // Главная функция для сравнения
 {
    int alg=strlen(edit_box_buff)/2;
-   if(md5_flag) //Если уже вычислено.
-    {
-        return !strcmp(edit_box_buff,hash_str_md5);
-    }
-    else if(sha1_flag)
-    {
-        return !strcmp(edit_box_buff,hash_str_sha1);
-    }
-    else if(sha256_flag)
-    {
-        return !strcmp(edit_box_buff, hash_str_sha256);
-    }
-    else
-    {
+
         switch (alg) // Если вычисления ещё небыло
         {
         case MD5_BLOCK_SIZE:
-            return calc_and_cmp(hash_str_md5,alg);
+            if(md5_flag)
+            {
+                return !strcmp(edit_box_buff,hash_str_md5);
+            }
+            else
+            {
+                return calc_and_cmp(hash_str_md5,alg);
+            }
         break;
 
         case SHA1_BLOCK_SIZE:
-            return calc_and_cmp(hash_str_sha1,alg);
+            if(sha1_flag)
+            {
+                return !strcmp(edit_box_buff,hash_str_sha1);
+            }
+            else
+            {
+                return calc_and_cmp(hash_str_sha1,alg);
+            }
         break;
 
         case SHA256_BLOCK_SIZE:
-            return calc_and_cmp(hash_str_sha256,alg);
+
+            if(sha256_flag)
+            {
+                return !strcmp(edit_box_buff,hash_str_sha256);
+            }
+            else
+            {
+                return calc_and_cmp(hash_str_sha256,alg);
+            }
         break;
 
         default:
             return FALSE;
         break;
         }
-    }
 }
 
 
@@ -300,7 +308,7 @@ int main(int argc, char** argv)
     int gui_event; // Перемная для хранения события
     uint32_t pressed_button = 0; // Код нажатой кнопки в окне
 
-    get_system_colors(&sys_color_table); 
+    get_system_colors(&sys_color_table);
     set_event_mask(0xC0000027); // Устанавливаем маску событий
     do // Цикл обработки событий
     {
@@ -315,7 +323,6 @@ int main(int argc, char** argv)
         case KOLIBRI_EVENT_KEY:
             edit_box(get_key()); // Получаем нажатую клавишу и задействуем строку ввода
             redraw_window();
-            puts(edit_box_buff);
             break;
         case KOLIBRI_EVENT_BUTTON: // Событие обработки кнопок
             pressed_button = get_os_button(); // Получение кода нажатой кнопки.
@@ -353,12 +360,12 @@ int main(int argc, char** argv)
                     redraw_window();
                     copy_to_clipboard(hash_str_sha256);
                 break;
-
+                /*
                 case BTN_PASTE:
-                   /* paste_to_edit_buffer();
-                    redraw_window();*/
+                    paste_to_edit_buffer();
+                    redraw_window();
                 break;
-                
+                 */
                 case BTN_CMP:
                 if(hash_compare())
                 {
