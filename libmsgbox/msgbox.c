@@ -1,7 +1,6 @@
 #include "kos32sys.h"
 #include <stdlib.h>
 #include "msgbox.h"
-
 #define BTN_EXIT 1
 
 
