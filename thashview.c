@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "libmsgbox/kos32sys.h"
-#include "libmsgbox/msgbox.h"
+#include "kos32sys.h"
+#include "notify.h"
 #include <string.h>
 #include <stdarg.h>
 #include "algorithms/md5.h"
@@ -20,15 +20,18 @@ char hash_str_md5[MAX_HASH_LEN]=   "Click the 'MD5:' button to show the md5-chec
 char hash_str_sha1[MAX_HASH_LEN]=  "Click the 'SHA1:' button to show the sha1-checksum!    "; //Вывод SHA1
 char hash_str_sha256[MAX_HASH_LEN]="Click the 'SHA256:' button to show the sha256-checksum!"; //Вывод SHA256
 char edit_box_buff[MAX_HASH_LEN]; // Буффер для ввода
-char filename[FILENAME_MAX]; // Имя обрабатываемого файла
-char title[FILENAME_MAX+10]; // Заголовок окна
+char *filename; // Имя обрабатываемого файла
+char *title; // Заголовок окна
 
 enum MYCOLORS // Цвета
 {
     GREEN = 0x00067D06,
-    RED =   0x00FF0000,
-    BLACK = 0x00000000
+    RED   = 0x00FF0000,
+    BLACK = 0x00000000,
+    WHITE = 0xFFFFFFFF,
+    GREY  = 0x00DDD7CF
 };
+
 
 unsigned int str_pos=0; // Позиция курсора при пичати в строке ввода
 int md5_flag=0, sha1_flag=0, sha256_flag=0; // Флаги показывающие был ли уже рассчитана котрольная сумма в функции check_sum()
@@ -51,6 +54,7 @@ enum BUTTONS // Кнопки в интрефейсе
     BTN_CMP=40,        //Сравнить edit_box и контрольную сумму
     BTN_PASTE=50       //Вставить в edit_box(пока в разработке)
 };
+
 void edit_box(oskey_t key)              //Прототип ввода строки
 {
     edit_box_text_color=BLACK;
@@ -68,7 +72,6 @@ void edit_box(oskey_t key)              //Прототип ввода строк
            str_pos++;
         }
     }
-   // printf("%d",str_pos); Для отладки
 }
 
 void* safe_malloc(size_t size) // Безопасный malloc. Вызывает окно ошибки если память не была выделена
@@ -76,13 +79,19 @@ void* safe_malloc(size_t size) // Безопасный malloc. Вызывает 
     void *p=malloc(size);
     if(p==NULL)
     {
-        error_box("Memory allocation error!");
-        exit(0);
+       notify_show("'Memory allocation error!' -E");
+       exit(0);
     }
     else
     {
         return p;
     }
+}
+
+global_var_init(unsigned int size)
+{
+  filename=safe_malloc(size);
+  title=safe_malloc(size+20);
 }
 
 /* Функции генерации контрольных сумм */
@@ -158,7 +167,7 @@ BYTE* check_sum(int alg) // Генерируем контрольные сумм
 
 void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауем двоичные данные из hash в строку hash_str
 {
-    char block[2];
+    char block[3];
     memset(hash_str, 0, MAX_HASH_LEN); // Очищаем строку для strcat
     for(int i=0; i<hash_size; i++)
     {
@@ -171,11 +180,11 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауе
 void redraw_window() //Рисуем окно
 {
     pos_t win_pos = get_mouse_pos(0); //Получаем позицию курсора мыши.
-    sprintf(title,"%s - thashview 1.1", filename); // Устанавливаем заголовок окна
+    sprintf(title,"%s - thashview 1.2exp", filename); // Устанавливаем заголовок окна
     begin_draw(); //Начинаем рисование интерфейса )
-    sys_create_window(win_pos.x, win_pos.y, 665, 160, title, 0xFFFFFFFF, 0x14); // Создаём окно.
+    sys_create_window(win_pos.x, win_pos.y, 665, 160, title, GREY, 0x14); // Создаём окно.
 
-    draw_bar(10, 121, 525,20, 0x802C8C8C8); // Создаём прямоугольник для поля ввода
+    draw_bar(10, 121, 525,20, WHITE); // Создаём прямоугольник для поля ввода
     draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // Выводим текст из буффера ввода
 
     define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Определяем кнопку md5
@@ -206,28 +215,35 @@ void redraw_window() //Рисуем окно
     end_draw();
 }
 
-/*
+
 void paste_to_edit_buffer()
 {
-    char* temp_buff=malloc(MAX_HASH_LEN+12);
-    temp_buff=kol_clip_get(MAX_HASH_LEN+12);
-    if((int)*(temp_buff+4)==0 && (int)*(temp_buff+8)==1)
+    char *temp_buff;
+    temp_buff=kol_clip_get(kol_clip_num()-1);
+    memset(edit_box_buff,0,MAX_HASH_LEN);
+    if(((int)*(temp_buff)>0) && ((int)*(temp_buff+4)==0) && ((int)*(temp_buff+8)==1))
     {
         strcpy(edit_box_buff,temp_buff+12);
         str_pos=strlen(edit_box_buff);
+        notify_show("'Pasted from clipboard!' -I");
+        edit_box_text_color=BLACK;
     }
+    user_free(temp_buff);
 }
-*/
+
 
 void copy_to_clipboard(char *text) // Копирлвать в буффер обмена
 {
     if(55!=strlen(text))
     {
-        char temp_buffer[MAX_HASH_LEN+12];
+        char *temp_buffer=safe_malloc(MAX_HASH_LEN+12);
+        memset(temp_buffer, 0, MAX_HASH_LEN);
         *(temp_buffer+4)=0;
         *(temp_buffer+8)=1;
         strcpy(temp_buffer+12, text);
         kol_clip_set(strlen(text)+12, temp_buffer);
+        notify_show("'Copied to clipboard!' -I");
+        free(temp_buffer);
     }
 }
 
@@ -293,15 +309,19 @@ bool hash_compare() // Главная функция для сравнения
 
 int main(int argc, char** argv)
 {
-    strcpy(filename, argv[1]); // получаем имя файла
+    // получаем имя файла
     if(argc<2) // Если аргументов нет то сообщаем об этом
     {
-        error_box("No file selected!");
+        notify_show("'No file selected!' -E");
         exit(0);
     }
+
+    global_var_init(strlen(argv[1]));
+    strcpy(filename, argv[1]);
+
     if(NULL==fopen(filename,"rb")) // Если файла нет или не открывается
     {
-        error_box("File not found!");
+        notify_show("'File not found!' -E");
         exit(0);
     }
 
@@ -360,19 +380,21 @@ int main(int argc, char** argv)
                     redraw_window();
                     copy_to_clipboard(hash_str_sha256);
                 break;
-                /*
+
                 case BTN_PASTE:
                     paste_to_edit_buffer();
                     redraw_window();
                 break;
-                 */
+
                 case BTN_CMP:
                 if(hash_compare())
                 {
+                    notify_show("'The checksum matches :)' -OK");
                     edit_box_text_color=GREEN; // Устанавливаем текст ввода зелёным если контрольная сумма совпадает
                 }
                 else
                 {
+                    notify_show("'The checksum does not match! :(' -W");
                     edit_box_text_color=RED; // Устанавливаем текст ввода красным если контрольная суммы не совпадает
                 }
                 redraw_window();
