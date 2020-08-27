@@ -1,3 +1,2 @@
 #SHS
-/kolibrios/develop/tcc/tcc algorithms/md5.c algorithms/sha1.c algorithms/sha256.c thashview.c -o thashview -lck
-thashview LICENSE
+/ kolibrios / разработка / tcc / алгоритмы tcc / алгоритмы md5.c / алгоритмы sha1.c / sha256.c thashview.c -o thashview -lck
