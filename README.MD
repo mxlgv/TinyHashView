@@ -39,7 +39,7 @@
 - Integration with EOLITE (questionable).
 
 ### I thank
-- Maxim Kuzmitsky (maxcodehack) for the drawn badge, help with design and tests.
+- Maxim Kuzmitski (maxcodehack) for the drawn badge, help with design and tests.
 - Bopann Kostoev (Boppan) for finding bugs.
 - Rustem Gimadutdinov (rgmad) for testing.
 
