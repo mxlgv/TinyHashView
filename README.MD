@@ -12,7 +12,7 @@
 
 ### Compilation:
 
-**To compile under Kolibri OS, use TCC or run the script: "build_kex.sh" to auto-build.**
+**This program is almost entirely created in KolibriOS (I am a supporter of software development using the tools of the OS itself). So use TCC to compile or just run the "build_kex.sh" script to build it automatically.**
 
     tcc algorithms/md5.c algorithms/sha1.c algorithms/sha256.c thashview.c -o thashview -lck
         
