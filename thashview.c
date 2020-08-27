@@ -58,6 +58,7 @@ enum BUTTONS // Кнопки в интрефейсе
 void edit_box(oskey_t key)              //Прототип ввода строки
 {
     edit_box_text_color=BLACK;
+
     if(key.code==BACKSPACE && str_pos>0) // Если backspace то удалить последний символ
     {
         str_pos--;
@@ -180,12 +181,13 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауе
 void redraw_window() //Рисуем окно
 {
     pos_t win_pos = get_mouse_pos(0); //Получаем позицию курсора мыши.
-    sprintf(title,"%s - thashview 1.2exp", filename); // Устанавливаем заголовок окна
+    sprintf(title,"%s - thashview 2.0 by turbocat2001", filename); // Устанавливаем заголовок окна
     begin_draw(); //Начинаем рисование интерфейса )
-    sys_create_window(win_pos.x, win_pos.y, 665, 160, title, GREY, 0x14); // Создаём окно.
+    sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // Создаём окно.
 
     draw_bar(10, 121, 525,20, WHITE); // Создаём прямоугольник для поля ввода
     draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // Выводим текст из буффера ввода
+    draw_text_sys("|",10+(8*str_pos),125,0,0x90000000 | sys_color_table.work_text);
 
     define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Определяем кнопку md5
     define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// Определяем кнопку sha1
@@ -203,15 +205,15 @@ void redraw_window() //Рисуем окно
     define_button((610<< 16) + 42, (60 << 16) + 20, BTN_COPY_SHA1, sys_color_table.work_button);
     define_button((610<< 16) + 42, (90 << 16) + 20, BTN_COPY_SHA256, sys_color_table.work_button);
 
-    draw_text_sys("copy", 615, 34, 0,   0x90000000 | sys_color_table.work_button_text); // Пишем copy на всех кнопках для копирования
-    draw_text_sys("copy", 615, 64, 0,  0x90000000 | sys_color_table.work_button_text);
-    draw_text_sys("copy", 615, 94, 0, 0x90000000 | sys_color_table.work_button_text);
+    draw_text_sys("Copy", 615, 34, 0,   0x90000000 | sys_color_table.work_button_text); // Пишем copy на всех кнопках для копирования
+    draw_text_sys("Copy", 615, 64, 0,  0x90000000 | sys_color_table.work_button_text);
+    draw_text_sys("Copy", 615, 94, 0, 0x90000000 | sys_color_table.work_button_text);
 
-    define_button((592<< 16) + 60, (120 << 16) + 20, BTN_CMP, sys_color_table.work_button); // Определяем кнопку для сравнения контольных сумм
-    draw_text_sys("compare", 595, 124 , 0,0x90000000 | sys_color_table.work_button_text); // Пишем текс на кнопке.
+    define_button((592<< 16) + 60, (120 << 16) + 20, BTN_CMP, GREEN); // Определяем кнопку для сравнения контольных сумм
+    draw_text_sys("Compare", 595, 124 , 0,0x90000000 | sys_color_table.work_button_text); // Пишем текс на кнопке.
 
     define_button((540 << 16) + 45, (120 << 16) + 20, BTN_PASTE, sys_color_table.work_button); //Кнопка для вставки (неработает)
-    draw_text_sys("paste", 542, 124 , 0,0x90000000 | sys_color_table.work_button_text); // Текст paste на кнопке
+    draw_text_sys("Paste", 543, 124 , 0,0x90000000 | sys_color_table.work_button_text); // Текст paste на кнопке
     end_draw();
 }
 
@@ -305,7 +307,6 @@ bool hash_compare() // Главная функция для сравнения
         break;
         }
 }
-
 
 int main(int argc, char** argv)
 {
