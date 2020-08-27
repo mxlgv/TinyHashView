@@ -181,7 +181,7 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауе
 void redraw_window() //Рисуем окно
 {
     pos_t win_pos = get_mouse_pos(0); //Получаем позицию курсора мыши.
-    sprintf(title,"%s - thashview 2.0 by turbocat2001", filename); // Устанавливаем заголовок окна
+    sprintf(title,"%s - thashview 2.0", filename); // Устанавливаем заголовок окна
     begin_draw(); //Начинаем рисование интерфейса )
     sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // Создаём окно.
 
@@ -225,7 +225,7 @@ void paste_to_edit_buffer()
     memset(edit_box_buff,0,MAX_HASH_LEN);
     if(((int)*(temp_buff)>0) && ((int)*(temp_buff+4)==0) && ((int)*(temp_buff+8)==1))
     {
-        strcpy(edit_box_buff,temp_buff+12);
+        strncpy(edit_box_buff,temp_buff+12, MAX_HASH_LEN-1);
         str_pos=strlen(edit_box_buff);
         notify_show("'Pasted from clipboard!' -I");
         edit_box_text_color=BLACK;
@@ -242,7 +242,7 @@ void copy_to_clipboard(char *text) // Копирлвать в буффер об�
         memset(temp_buffer, 0, MAX_HASH_LEN);
         *(temp_buffer+4)=0;
         *(temp_buffer+8)=1;
-        strcpy(temp_buffer+12, text);
+        strncpy(temp_buffer+12, text, MAX_HASH_LEN-1);
         kol_clip_set(strlen(text)+12, temp_buffer);
         notify_show("'Copied to clipboard!' -I");
         free(temp_buffer);
