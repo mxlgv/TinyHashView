@@ -1,3 +1,4 @@
+/*€¢â®à: ‹®£ ¥¢ Œ ªá¨¬(turbocat2001) */
 #include <stdio.h>
 #include <stdlib.h>
 #include "kos32sys.h"
@@ -10,20 +11,20 @@
 
 #define TRUE 1;
 #define FALSE 0;
-#define MAX_HASH_LEN 65 // ÐœÐ°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð°Ñ Ð´Ð»Ð¸Ð½Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸ÑŽ
+#define MAX_HASH_LEN 65 // Œ ªá¨¬ «ì­ ï ¤«¨­  áâà®ª¨
 
 typedef unsigned char bool;
 struct kolibri_system_colors sys_color_table;
 
-char hex[]={"abcdefABCDEF1234567890"}; //Ð”Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð²Ð²Ð¾Ð´Ð¸Ð¼Ñ‹Ñ… ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²
-char hash_str_md5[MAX_HASH_LEN]=   "Click the 'MD5:' button to show the md5-checksum!      "; //Ð’Ñ‹Ð²Ð¾Ð´ MD5
-char hash_str_sha1[MAX_HASH_LEN]=  "Click the 'SHA1:' button to show the sha1-checksum!    "; //Ð’Ñ‹Ð²Ð¾Ð´ SHA1
-char hash_str_sha256[MAX_HASH_LEN]="Click the 'SHA256:' button to show the sha256-checksum!"; //Ð’Ñ‹Ð²Ð¾Ð´ SHA256
-char edit_box_buff[MAX_HASH_LEN]; // Ð‘ÑƒÑ„Ñ„ÐµÑ€ Ð´Ð»Ñ Ð²Ð²Ð¾Ð´Ð°
-char *filename; // Ð˜Ð¼Ñ Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°
-char *title; // Ð—Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¾ÐºÐ½Ð°
+char hex[]={"abcdefABCDEF1234567890"}; //„«ï ¯à®¢¥àª¨ ¢¢®¤¨¬ëå á¨¬¢®«®¢
+char hash_str_md5[MAX_HASH_LEN]=   "Click the 'MD5:' button to show the md5-checksum!      "; //‚ë¢®¤ MD5
+char hash_str_sha1[MAX_HASH_LEN]=  "Click the 'SHA1:' button to show the sha1-checksum!    "; //‚ë¢®¤ SHA1
+char hash_str_sha256[MAX_HASH_LEN]="Click the 'SHA256:' button to show the sha256-checksum!"; //‚ë¢®¤ SHA256
+char edit_box_buff[MAX_HASH_LEN]; // ãää¥à ¤«ï ¢¢®¤ 
+char *filename; // ˆ¬ï ®¡à ¡ âë¢ ¥¬®£® ä ©« 
+char *title; // ‡ £®«®¢®ª ®ª­ 
 
-enum MYCOLORS // Ð¦Ð²ÐµÑ‚Ð°
+enum MYCOLORS // –¢¥â 
 {
     GREEN = 0x00067D06,
     RED   = 0x00FF0000,
@@ -33,39 +34,39 @@ enum MYCOLORS // Ð¦Ð²ÐµÑ‚Ð°
 };
 
 
-unsigned int str_pos=0; // ÐŸÐ¾Ð·Ð¸Ñ†Ð¸Ñ ÐºÑƒÑ€ÑÐ¾Ñ€Ð° Ð¿Ñ€Ð¸ Ð¿Ð¸Ñ‡Ð°Ñ‚Ð¸ Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ Ð²Ð²Ð¾Ð´Ð°
-int md5_flag=0, sha1_flag=0, sha256_flag=0; // Ð¤Ð»Ð°Ð³Ð¸ Ð¿Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ðµ Ð±Ñ‹Ð» Ð»Ð¸ ÑƒÐ¶Ðµ Ñ€Ð°ÑÑÑ‡Ð¸Ñ‚Ð°Ð½Ð° ÐºÐ¾Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ð°Ñ ÑÑƒÐ¼Ð¼Ð° Ð² Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸ check_sum()
-int edit_box_text_color=BLACK; // Ð˜Ð·Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ñ†Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð° Ð² ÑÑ‚Ñ€Ð¾ÐºÐµ Ð²Ð²Ð¾Ð´Ð°
+unsigned int str_pos=0; // ®§¨æ¨ï ªãàá®à  ¯à¨ ¯¥ç â¨ ¢ áâà®ª¥ ¢¢®¤ 
+int md5_flag=0, sha1_flag=0, sha256_flag=0; // ”« £¨ ¯®ª §ë¢ îé¨¥ ¡ë«  «¨ ã¦¥ à ááç¨â ­  ª®âà®«ì­ ï áã¬¬  ¢ äã­ªæ¨¨ check_sum()
+int edit_box_text_color=BLACK; // ˆ§­ ç «ì­ë© æ¢¥â â¥ªáâ  ¢ áâà®ª¥ ¢¢®¤ 
 
-enum MYKEYS // ÐšÐ¾Ð´Ñ‹ ÐºÐ»Ð°Ð²Ð¸Ñˆ
+enum MYKEYS // Š®¤ë ª« ¢¨è
 {
     BACKSPACE=8
 };
 
-enum BUTTONS // ÐšÐ½Ð¾Ð¿ÐºÐ¸ Ð² Ð¸Ð½Ñ‚Ñ€ÐµÑ„ÐµÐ¹ÑÐµ
+enum BUTTONS // Š­®¯ª¨ ¢ ¨­âà¥ä¥©á¥
 {
-    BTN_QUIT=1,        //Ð’Ñ‹Ñ…Ð¾Ð´
-    BTN_MD5 = 10,      //Ð Ð°ÑÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ md5-ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ
-    BTN_SHA1 = 20,     //Ð Ð°ÑÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ sha1-ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ
-    BTN_SHA256 = 30,   //Ð Ð°ÑÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ sha256-ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ
-    BTN_COPY_MD5= 11,  //Ð¡ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð² Ð±ÑƒÑ„Ñ„ÐµÑ€ Ð¾Ð±Ð¼ÐµÐ½Ð°
+    BTN_QUIT=1,        //‚ëå®¤
+    BTN_MD5 = 10,      // ááç¨â âì md5-ª®­âà®«ì­ãî áã¬¬ã
+    BTN_SHA1 = 20,     // ááç¨â âì sha1-ª®­âà®«ì­ãî áã¬¬ã
+    BTN_SHA256 = 30,   // ááç¨â âì sha256-ª®­âà®«ì­ãî áã¬¬ã
+    BTN_COPY_MD5= 11,  //‘ª®¯¨à®¢ âì ¢ ¡ãää¥à ®¡¬¥­ 
     BTN_COPY_SHA1= 21,
     BTN_COPY_SHA256=31,
-    BTN_CMP=40,        //Ð¡Ñ€Ð°Ð²Ð½Ð¸Ñ‚ÑŒ edit_box Ð¸ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ
-    BTN_PASTE=50       //Ð’ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð² edit_box(Ð¿Ð¾ÐºÐ° Ð² Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐµ)
+    BTN_CMP=40,        //‘à ¢­¨âì edit_box ¨ ª®­âà®«ì­ãî áã¬¬ã
+    BTN_PASTE=50       //‚áâ ¢¨âì ¢ edit_box(¯®ª  ¢ à §à ¡®âª¥)
 };
 
-void edit_box(oskey_t key)              //ÐŸÑ€Ð¾Ñ‚Ð¾Ñ‚Ð¸Ð¿ Ð²Ð²Ð¾Ð´Ð° ÑÑ‚Ñ€Ð¾ÐºÐ¸
+void edit_box(oskey_t key)              //”ã­ªæ¨ï à¥ «¨§ãîé ï áâà®ªã ¢¢®¤ 
 {
     edit_box_text_color=BLACK;
 
-    if(key.code==BACKSPACE && str_pos>0) // Ð•ÑÐ»Ð¸ backspace Ñ‚Ð¾ ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¿Ð¾ÑÐ»ÐµÐ´Ð½Ð¸Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð»
+    if(key.code==BACKSPACE && str_pos>0) // …á«¨ backspace â® ã¤ «¨âì ¯®á«¥¤­¨© á¨¬¢®«
     {
         str_pos--;
         edit_box_buff[str_pos]='\0';
 
     }
-    else if(str_pos<MAX_HASH_LEN-1) // ÐžÐ³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð¸Ðµ Ð´Ð»Ð¸Ð½Ñ‹ Ð²Ð²Ð¾Ð´Ð°
+    else if(str_pos<MAX_HASH_LEN-1) // Ž£à ­¨ç¥­¨¥ ¤«¨­ë ¢¢®¤ 
     {
         if(strchr(hex,key.code)!=NULL)
         {
@@ -75,7 +76,7 @@ void edit_box(oskey_t key)              //ÐŸÑ€Ð¾Ñ‚Ð¾Ñ‚Ð¸Ð¿ Ð²Ð²Ð¾Ð´Ð° ÑÑ‚Ñ€Ð¾Ðº
     }
 }
 
-void* safe_malloc(size_t size) // Ð‘ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ñ‹Ð¹ malloc. Ð’Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ð¾ÐºÐ½Ð¾ Ð¾ÑˆÐ¸Ð±ÐºÐ¸ ÐµÑÐ»Ð¸ Ð¿Ð°Ð¼ÑÑ‚ÑŒ Ð½Ðµ Ð±Ñ‹Ð»Ð° Ð²Ñ‹Ð´ÐµÐ»ÐµÐ½Ð°
+void* safe_malloc(size_t size) // ¥§®¯ á­ë© malloc. ®ª §ë¢ ¥â ã¢¥¤®¬«¥­¨¥ ®¡ ®è¨¡ª¥ ¨ § ªàë¢ ¥â ¯à®£à ¬¬ã ¥á«¨ ¯ ¬ïâì ­¥ ¡ë«  ¢ë¤¥«¥­ 
 {
     void *p=malloc(size);
     if(p==NULL)
@@ -89,13 +90,13 @@ void* safe_malloc(size_t size) // Ð‘ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ñ‹Ð¹ malloc. Ð’Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ 
     }
 }
 
-global_var_init(unsigned int size)
+global_var_init(unsigned int size)  // ˆ­¨æ¨ «¨§¨àãîâáï £«®¡ «ì­ë¥ ¬ áá¨¢ë
 {
   filename=safe_malloc(size);
   title=safe_malloc(size+20);
 }
 
-/* Ð¤ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ð¸ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ñ‹Ñ… ÑÑƒÐ¼Ð¼ */
+/* ”ã­ªæ¨¨ £¥­¥à æ¨¨ ª®­âà®«ì­ëå áã¬¬ */
 void md5_hash(FILE* input, BYTE* hash )
 {
     int input_size;
@@ -139,7 +140,7 @@ void sha256_hash(FILE* input, BYTE* hash )
 }
 
 
-BYTE* check_sum(int alg) // Ð“ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ñ‹Ðµ ÑÑƒÐ¼Ð¼Ñ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑ Ð¾Ð´Ð¸Ð½ Ð¸Ð· Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð¾Ð²
+BYTE* check_sum(int alg) // ƒ¥­¥à¨àã¥¬ ª®­âà®«ì­ë¥ áã¬¬ë ¨á¯®«ì§ãï ®¤¨­ ¨§  «£®à¨â¬®¢
 {
     FILE* input_file;
     BYTE *hash;
@@ -166,10 +167,10 @@ BYTE* check_sum(int alg) // Ð“ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ñ‹Ðµ ÑÑƒÐ¼Ð¼
     return hash;
 }
 
-void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°ÑƒÐµÐ¼ Ð´Ð²Ð¾Ð¸Ñ‡Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· hash Ð² ÑÑ‚Ñ€Ð¾ÐºÑƒ hash_str
+void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //à¥®¡à ã¥¬ ¤¢®¨ç­ë¥ ¤ ­­ë¥ ¨§ hash ¢ áâà®ªã hash_str
 {
     char block[3];
-    memset(hash_str, 0, MAX_HASH_LEN); // ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð´Ð»Ñ strcat
+    memset(hash_str, 0, MAX_HASH_LEN); // Žç¨é ¥¬ áâà®ªã ¤«ï strcat
     for(int i=0; i<hash_size; i++)
     {
         sprintf(block,"%02x", hash[i]);
@@ -178,47 +179,47 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°ÑƒÐµ
     free(hash);
 }
 
-void redraw_window() //Ð Ð¸ÑÑƒÐµÐ¼ Ð¾ÐºÐ½Ð¾
+void redraw_window() //¨áã¥¬ ®ª­®
 {
-    pos_t win_pos = get_mouse_pos(0); //ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸ÑŽ ÐºÑƒÑ€ÑÐ¾Ñ€Ð° Ð¼Ñ‹ÑˆÐ¸.
-    sprintf(title,"%s - thashview 2.0", filename); // Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº Ð¾ÐºÐ½Ð°
-    begin_draw(); //ÐÐ°Ñ‡Ð¸Ð½Ð°ÐµÐ¼ Ñ€Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ° )
-    sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ð¼ Ð¾ÐºÐ½Ð¾.
+    pos_t win_pos = get_mouse_pos(0); //®«ãç ¥¬ ¯®§¨æ¨î ªãàá®à  ¬ëè¨.
+    sprintf(title,"%s - thashview 2.0", filename); // “áâ ­ ¢«¨¢ ¥¬ § £®«®¢®ª ®ª­ 
+    begin_draw(); // ç¨­ ¥¬ à¨á®¢ ­¨¥ ¨­â¥àä¥©á  )
+    sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // ‘®§¤ ñ¬ ®ª­®.
 
-    draw_bar(10, 121, 525,20, WHITE); // Ð¡Ð¾Ð·Ð´Ð°Ñ‘Ð¼ Ð¿Ñ€ÑÐ¼Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸Ðº Ð´Ð»Ñ Ð¿Ð¾Ð»Ñ Ð²Ð²Ð¾Ð´Ð°
-    draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ñ‚ÐµÐºÑÑ‚ Ð¸Ð· Ð±ÑƒÑ„Ñ„ÐµÑ€Ð° Ð²Ð²Ð¾Ð´Ð°
+    draw_bar(10, 121, 525,20, WHITE); // ‘®§¤ ñ¬ ¯àï¬®ã£®«ì­¨ª ¤«ï ¯®«ï ¢¢®¤ 
+    draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // ‚ë¢®¤¨¬ â¥ªáâ ¨§ ¡ãää¥à  ¢¢®¤ 
     draw_text_sys("|",10+(8*str_pos),125,0,0x90000000 | sys_color_table.work_text);
 
-    define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ md5
-    define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ sha1
-    define_button((10 << 16) + 60, (90 << 16) + 20, BTN_SHA256, GREEN);// ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ sha256
+    define_button((10 << 16) + 60, (30 << 16) + 20, BTN_MD5, GREEN); // Ž¯à¥¤¥«ï¥¬ ª­®¯ªã md5
+    define_button((10 << 16) + 60, (60 << 16) + 20, BTN_SHA1, GREEN);// Ž¯à¥¤¥«ï¥¬ ª­®¯ªã sha1
+    define_button((10 << 16) + 60, (90 << 16) + 20, BTN_SHA256, GREEN);// Ž¯à¥¤¥«ï¥¬ ª­®¯ªã sha256
 
-    draw_text_sys("MD5:", 15, 34, 0,   0x90000000 | sys_color_table.work_button_text); // ÐŸÐ¸Ñ‰ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚ Ð½Ð° ÐºÐ½Ð¾Ð¿ÐºÐ°Ñ…
+    draw_text_sys("MD5:", 15, 34, 0,   0x90000000 | sys_color_table.work_button_text); // ¨é¥¬ â¥ªáâ ­  ª­®¯ª å
     draw_text_sys("SHA1:", 15, 64, 0,  0x90000000 | sys_color_table.work_button_text);
     draw_text_sys("SHA256:", 15,94, 0, 0x90000000 | sys_color_table.work_button_text);
 
-    draw_text_sys(hash_str_md5, 80, 34, 0, 0x90000000 | sys_color_table.work_text); // Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ñ‹Ðµ ÑÑƒÐ¼Ð¼Ñ‹ Ð² Ð¾ÐºÐ½Ð¾
+    draw_text_sys(hash_str_md5, 80, 34, 0, 0x90000000 | sys_color_table.work_text); // ‚ë¢®¤¨¬ ª®­âà®«ì­ë¥ áã¬¬ë ¢ ®ª­®
     draw_text_sys(hash_str_sha1, 80, 64, 0, 0x90000000 | sys_color_table.work_text);
     draw_text_sys(hash_str_sha256, 80, 94, 0, 0x90000000| sys_color_table.work_text);
 
-    define_button((610 << 16) + 42, (30 << 16) + 20, BTN_COPY_MD5, sys_color_table.work_button); // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð´Ð»Ñ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
+    define_button((610 << 16) + 42, (30 << 16) + 20, BTN_COPY_MD5, sys_color_table.work_button); // Ž¯à¥¤¥«ï¥¬ ª­®¯ª¨ ¤«ï ª®¯¨à®¢ ­¨ï
     define_button((610<< 16) + 42, (60 << 16) + 20, BTN_COPY_SHA1, sys_color_table.work_button);
     define_button((610<< 16) + 42, (90 << 16) + 20, BTN_COPY_SHA256, sys_color_table.work_button);
 
-    draw_text_sys("Copy", 615, 34, 0,   0x90000000 | sys_color_table.work_button_text); // ÐŸÐ¸ÑˆÐµÐ¼ copy Ð½Ð° Ð²ÑÐµÑ… ÐºÐ½Ð¾Ð¿ÐºÐ°Ñ… Ð´Ð»Ñ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
+    draw_text_sys("Copy", 615, 34, 0,   0x90000000 | sys_color_table.work_button_text); // ¨è¥¬ copy ­  ¢á¥å ª­®¯ª å ¤«ï ª®¯¨à®¢ ­¨ï
     draw_text_sys("Copy", 615, 64, 0,  0x90000000 | sys_color_table.work_button_text);
     draw_text_sys("Copy", 615, 94, 0, 0x90000000 | sys_color_table.work_button_text);
 
-    define_button((592<< 16) + 60, (120 << 16) + 20, BTN_CMP, GREEN); // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ Ð´Ð»Ñ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ ÐºÐ¾Ð½Ñ‚Ð¾Ð»ÑŒÐ½Ñ‹Ñ… ÑÑƒÐ¼Ð¼
-    draw_text_sys("Compare", 595, 124 , 0,0x90000000 | sys_color_table.work_button_text); // ÐŸÐ¸ÑˆÐµÐ¼ Ñ‚ÐµÐºÑ Ð½Ð° ÐºÐ½Ð¾Ð¿ÐºÐµ.
+    define_button((592<< 16) + 60, (120 << 16) + 20, BTN_CMP, GREEN); // Ž¯à¥¤¥«ï¥¬ ª­®¯ªã ¤«ï áà ¢­¥­¨ï ª®­â®«ì­ëå áã¬¬
+    draw_text_sys("Compare", 595, 124 , 0,0x90000000 | sys_color_table.work_button_text); // ¨è¥¬ â¥ªá ­  ª­®¯ª¥.
 
-    define_button((540 << 16) + 45, (120 << 16) + 20, BTN_PASTE, sys_color_table.work_button); //ÐšÐ½Ð¾Ð¿ÐºÐ° Ð´Ð»Ñ Ð²ÑÑ‚Ð°Ð²ÐºÐ¸ (Ð½ÐµÑ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚)
-    draw_text_sys("Paste", 543, 124 , 0,0x90000000 | sys_color_table.work_button_text); // Ð¢ÐµÐºÑÑ‚ paste Ð½Ð° ÐºÐ½Ð¾Ð¿ÐºÐµ
+    define_button((540 << 16) + 45, (120 << 16) + 20, BTN_PASTE, sys_color_table.work_button); //Š­®¯ª  ¤«ï ¢áâ ¢ª¨ (­¥à ¡®â ¥â)
+    draw_text_sys("Paste", 543, 124 , 0,0x90000000 | sys_color_table.work_button_text); // ’¥ªáâ paste ­  ª­®¯ª¥
     end_draw();
 }
 
 
-void paste_to_edit_buffer()
+void paste_to_edit_buffer()    // ‚áâ ¢¨âì ¨§ ¡ãää¥à  ®¡¬¥­ 
 {
     char *temp_buff;
     temp_buff=kol_clip_get(kol_clip_num()-1);
@@ -234,7 +235,7 @@ void paste_to_edit_buffer()
 }
 
 
-void copy_to_clipboard(char *text) // ÐšÐ¾Ð¿Ð¸Ñ€Ð»Ð²Ð°Ñ‚ÑŒ Ð² Ð±ÑƒÑ„Ñ„ÐµÑ€ Ð¾Ð±Ð¼ÐµÐ½Ð°
+void copy_to_clipboard(char *text) // Š®¯¨à«¢ âì ¢ ¡ãää¥à ®¡¬¥­ 
 {
     if(55!=strlen(text))
     {
@@ -249,24 +250,24 @@ void copy_to_clipboard(char *text) // ÐšÐ¾Ð¿Ð¸Ñ€Ð»Ð²Ð°Ñ‚ÑŒ Ð² Ð±ÑƒÑ„Ñ„ÐµÑ€ Ð¾Ð±Ð
     }
 }
 
-void print_pending_calc(char *str) // Ð’Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¾ Ñ‚Ð¾Ð¼ Ñ‡Ñ‚Ð¾ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ð°Ñ ÑÑƒÐ¼Ð¼Ð¼Ð° Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÑÐµÑ‚ÑÑ...
+void print_pending_calc(char *str) // ‚ë¢®¤¨¬ á®®¡é¥­¨¥ ® â®¬ çâ® ª®­âà®«ì­ ï áã¬¬¬  ¢ëç¨á«ï¥âáï.
 {
   strcpy(str, "Please wait! Calculating checksum...                   ");
   redraw_window();
 }
 
-bool calc_and_cmp(char *hash_str_universal,int alg) // Ð’Ñ‹Ñ‡Ð¸ÑÐ»ÑÐµÐ¼ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ Ð¸ ÑÑ€Ð°Ð²Ð½Ð¸Ð²Ð°ÐµÐ¼ Ñ edit_box_buff(Ð’Ð«Ð—Ð«Ð’ÐÐ•Ð¢ ÐŸÐÐ”Ð•ÐÐ˜Ð• ÐŸÐ ÐžÐ“Ð ÐÐœÐœÐ«)
+bool calc_and_cmp(char *hash_str_universal,int alg) // ‚ëç¨á«ï¥¬ ª®­âà®«ì­ãî áã¬¬ã ¨ áà ¢­¨¢ ¥¬ á edit_box_buff.
 {
    print_pending_calc(hash_str_universal);
    sprint_hash(check_sum(alg),hash_str_universal, alg);
    return !strcmp(edit_box_buff, hash_str_universal);
 }
 
-bool hash_compare() // Ð“Ð»Ð°Ð²Ð½Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ
+bool hash_compare() // ƒ« ¢­ ï äã­ªæ¨ï ¤«ï áà ¢­¥­¨ï
 {
    int alg=strlen(edit_box_buff)/2;
 
-        switch (alg) // Ð•ÑÐ»Ð¸ Ð²Ñ‹Ñ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ ÐµÑ‰Ñ‘ Ð½ÐµÐ±Ñ‹Ð»Ð¾
+        switch (alg) // …á«¨ ¢ëç¨á«¥­¨ï ¥éñ ­¥¡ë«®
         {
         case MD5_BLOCK_SIZE:
             if(md5_flag)
@@ -310,8 +311,8 @@ bool hash_compare() // Ð“Ð»Ð°Ð²Ð½Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ñ
 
 int main(int argc, char** argv)
 {
-    // Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð¸Ð¼Ñ Ñ„Ð°Ð¹Ð»Ð°
-    if(argc<2) // Ð•ÑÐ»Ð¸ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð½ÐµÑ‚ Ñ‚Ð¾ ÑÐ¾Ð¾Ð±Ñ‰Ð°ÐµÐ¼ Ð¾Ð± ÑÑ‚Ð¾Ð¼
+    // ¯®«ãç ¥¬ ¨¬ï ä ©« 
+    if(argc<2) // …á«¨  à£ã¬¥­â®¢ ­¥â â® á®®¡é ¥¬ ®¡ íâ®¬
     {
         notify_show("'No file selected!' -E");
         exit(0);
@@ -320,21 +321,21 @@ int main(int argc, char** argv)
     global_var_init(strlen(argv[1]));
     strcpy(filename, argv[1]);
 
-    if(NULL==fopen(filename,"rb")) // Ð•ÑÐ»Ð¸ Ñ„Ð°Ð¹Ð»Ð° Ð½ÐµÑ‚ Ð¸Ð»Ð¸ Ð½Ðµ Ð¾Ñ‚ÐºÑ€Ñ‹Ð²Ð°ÐµÑ‚ÑÑ
+    if(NULL==fopen(filename,"rb")) // …á«¨ ä ©«  ­¥â ¨«¨ ­¥ ®âªàë¢ ¥âáï
     {
         notify_show("'File not found!' -E");
         exit(0);
     }
 
-    int gui_event; // ÐŸÐµÑ€ÐµÐ¼Ð½Ð°Ñ Ð´Ð»Ñ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ
-    uint32_t pressed_button = 0; // ÐšÐ¾Ð´ Ð½Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð² Ð¾ÐºÐ½Ðµ
+    int gui_event; // ¥à¥¬­ ï ¤«ï åà ­¥­¨ï á®¡ëâ¨ï
+    uint32_t pressed_button = 0; // Š®¤ ­ ¦ â®© ª­®¯ª¨ ¢ ®ª­¥
 
     get_system_colors(&sys_color_table);
-    set_event_mask(0xC0000027); // Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð¼Ð°ÑÐºÑƒ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹
-    do // Ð¦Ð¸ÐºÐ» Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹
+    set_event_mask(0xC0000027); // “áâ ­ ¢«¨¢ ¥¬ ¬ áªã á®¡ëâ¨©
+    do // –¨ª« ®¡à ¡®âª¨ á®¡ëâ¨©
     {
-        gui_event = get_os_event(); // ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ðµ
-        switch(gui_event) // ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ñ
+        gui_event = get_os_event(); // ®«ãç ¥¬ á®¡ëâ¨¥
+        switch(gui_event) // Ž¡à ¡ âë¢ ¥¬ á®¡ëâ¨ï
         {
         case KOLIBRI_EVENT_NONE:
             break;
@@ -342,12 +343,12 @@ int main(int argc, char** argv)
             redraw_window();
             break;
         case KOLIBRI_EVENT_KEY:
-            edit_box(get_key()); // ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð½Ð°Ð¶Ð°Ñ‚ÑƒÑŽ ÐºÐ»Ð°Ð²Ð¸ÑˆÑƒ Ð¸ Ð·Ð°Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÐµÐ¼ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð²Ð²Ð¾Ð´Ð°
+            edit_box(get_key()); // ®«ãç ¥¬ ­ ¦ âãî ª« ¢¨èã ¨ § ¤¥©áâ¢ã¥¬ áâà®ªã ¢¢®¤ 
             redraw_window();
             break;
-        case KOLIBRI_EVENT_BUTTON: // Ð¡Ð¾Ð±Ñ‹Ñ‚Ð¸Ðµ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸ ÐºÐ½Ð¾Ð¿Ð¾Ðº
-            pressed_button = get_os_button(); // ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð´Ð° Ð½Ð°Ð¶Ð°Ñ‚Ð¾Ð¹ ÐºÐ½Ð¾Ð¿ÐºÐ¸.
-            switch (pressed_button) // ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÐºÐ°ÐºÐ°Ñ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð±Ñ‹Ð»Ð° Ð½Ð°Ð¶Ð°Ñ‚Ð°
+        case KOLIBRI_EVENT_BUTTON: // ‘®¡ëâ¨¥ ®¡à ¡®âª¨ ª­®¯®ª
+            pressed_button = get_os_button(); // ®«ãç¥­¨¥ ª®¤  ­ ¦ â®© ª­®¯ª¨.
+            switch (pressed_button) // à®¢¥àª  ª ª ï ª­®¯ª  ¡ë«  ­ ¦ â 
             {
                 case BTN_MD5:
                     print_pending_calc(hash_str_md5);
@@ -391,12 +392,12 @@ int main(int argc, char** argv)
                 if(hash_compare())
                 {
                     notify_show("'The checksum matches :)' -OK");
-                    edit_box_text_color=GREEN; // Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚ Ð²Ð²Ð¾Ð´Ð° Ð·ÐµÐ»Ñ‘Ð½Ñ‹Ð¼ ÐµÑÐ»Ð¸ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ð°Ñ ÑÑƒÐ¼Ð¼Ð° ÑÐ¾Ð²Ð¿Ð°Ð´Ð°ÐµÑ‚
+                    edit_box_text_color=GREEN; // “áâ ­ ¢«¨¢ ¥¬ â¥ªáâ ¢¢®¤  §¥«ñ­ë¬ ¥á«¨ ª®­âà®«ì­ ï áã¬¬  á®¢¯ ¤ ¥â
                 }
                 else
                 {
                     notify_show("'The checksum does not match! :(' -W");
-                    edit_box_text_color=RED; // Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚ Ð²Ð²Ð¾Ð´Ð° ÐºÑ€Ð°ÑÐ½Ñ‹Ð¼ ÐµÑÐ»Ð¸ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒÐ½Ð°Ñ ÑÑƒÐ¼Ð¼Ñ‹ Ð½Ðµ ÑÐ¾Ð²Ð¿Ð°Ð´Ð°ÐµÑ‚
+                    edit_box_text_color=RED; // “áâ ­ ¢«¨¢ ¥¬ â¥ªáâ ¢¢®¤  ªà á­ë¬ ¥á«¨ ª®­âà®«ì­ ï áã¬¬ë ­¥ á®¢¯ ¤ ¥â
                 }
                 redraw_window();
                 break;
@@ -408,5 +409,3 @@ int main(int argc, char** argv)
         }
     }while(1);
 }
-
-
