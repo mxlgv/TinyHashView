@@ -40,6 +40,7 @@ int edit_box_text_color=BLACK; // Изначальный цвет текста в строке ввода
 
 enum MYKEYS // Коды клавиш
 {
+    CTRL_V=22,
     BACKSPACE=8
 };
 
@@ -56,25 +57,7 @@ enum BUTTONS // Кнопки в интрефейсе
     BTN_PASTE=50       //Вставить в edit_box(пока в разработке)
 };
 
-void edit_box(oskey_t key)              //Функция реализующая строку ввода
-{
-    edit_box_text_color=BLACK;
 
-    if(key.code==BACKSPACE && str_pos>0) // Если backspace то удалить последний символ
-    {
-        str_pos--;
-        edit_box_buff[str_pos]='\0';
-
-    }
-    else if(str_pos<MAX_HASH_LEN-1) // Ограничение длины ввода
-    {
-        if(strchr(hex,key.code)!=NULL)
-        {
-           edit_box_buff[str_pos]=key.code;
-           str_pos++;
-        }
-    }
-}
 
 void* safe_malloc(size_t size) // Безопасный malloc. Показывает уведомление об ошибке и закрывает программу если память не была выделена
 {
@@ -307,6 +290,30 @@ bool hash_compare() // Главная функция для сравнения
             return FALSE;
         break;
         }
+}
+
+void edit_box(oskey_t key)      //Функция реализующая строку ввода
+{
+    edit_box_text_color=BLACK;
+
+    if(key.code==CTRL_V) // Если нажато Ctrl+V то вставить из буфера обмена
+    {
+        paste_to_edit_buffer();
+    }
+    if(key.code==BACKSPACE && str_pos>0) // Если backspace то удалить последний символ
+    {
+        str_pos--;
+        edit_box_buff[str_pos]='\0';
+
+    }
+    else if(str_pos<MAX_HASH_LEN-1) // Ограничение длины ввода
+    {
+        if(strchr(hex,key.code)!=NULL)
+        {
+           edit_box_buff[str_pos]=key.code;
+           str_pos++;
+        }
+    }
 }
 
 int main(int argc, char** argv)
