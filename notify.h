@@ -1,5 +1,5 @@
 #include "kos32sys.h"
-void notify_show(const char *text)
+void notify_show(char *text)
 {
    start_app("/sys/@notify", text);
 }
