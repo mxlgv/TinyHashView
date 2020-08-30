@@ -16,7 +16,7 @@
 
     tcc algorithms/md5.c algorithms/sha1.c algorithms/sha256.c thashview.c -o thashview -lck
     
-**It is also possible to build my program in Linux and Windows using the SDK and Serge's toolchain. You can use my packages for Linux: [kos32-sdk]("https://github.com/turbocat2001/kos32-sdk-bin")**
+**It is also possible to build my program in Linux and Windows using the SDK and Serge's toolchain. You can use my packages for Linux: [kos32-sdk](https://github.com/turbocat2001/kos32-sdk-linux)**
 
 *For Linux:*
 
