@@ -15,7 +15,17 @@
 **This program is almost entirely created in KolibriOS (I am a supporter of software development using the tools of the OS itself). So use TCC to compile or just run the "build_kex.sh" script to build it automatically.**
 
     tcc algorithms/md5.c algorithms/sha1.c algorithms/sha256.c thashview.c -o thashview -lck
-        
+    
+**It is also possible to build my program in Linux and Windows using the SDK and Serge's toolchain. You can use my packages for Linux: [kos32-sdk]("https://github.com/turbocat2001/kos32-sdk-bin") **
+
+*For Linux:*
+
+    make
+
+*For Windows:*
+    
+    build_kex_kossdk.bat   
+    
 ### Usage example:
 
 **Open the file with "thashview" in EOLITE or run it in "SHELL**
@@ -39,9 +49,10 @@
 - Integration with EOLITE (questionable).
 
 ### I thank
-- Maxim Kuzmitski (maxcodehack) for the drawn badge, help with design and tests.
+- Maxim Kuzmitski (maxcodehack) for drawing the icon, helping with the design, and creating a makefile for building for Linux.
+- Rustem Gimadutdinov (rgmad) for testing and script creation for Windows.
 - Bopann Kostoev (Boppan) for finding bugs.
-- Rustem Gimadutdinov (rgmad) for testing.
+
 
 
 
