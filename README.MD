@@ -50,7 +50,7 @@
 
 ### I thank
 - Maxim Kuzmitski (maxcodehack) for drawing the icon, helping with the design, and creating a makefile for building for Linux.
-- Rustem Gimadutdinov (rgmad) for testing and script creation for Windows.
+- Rustem Gimadutdinov (rgimad) for testing and script creation for Windows.
 - Bopann Kostoev (Boppan) for finding bugs.
 
 
