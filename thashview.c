@@ -73,7 +73,7 @@ void* safe_malloc(size_t size) // Безопасный malloc. Показывает уведомление об о
     }
 }
 
-global_var_init(unsigned int size)  // Инициализируются глобальные массивы
+void global_var_init(unsigned int size)  // Инициализируются глобальные массивы
 {
   filename=safe_malloc(size);
   title=safe_malloc(size+20);
@@ -165,7 +165,7 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауем двоичны
 void redraw_window() //Рисуем окно
 {
     pos_t win_pos = get_mouse_pos(0); //Получаем позицию курсора мыши.
-    sprintf(title,"%s - thashview 2.0", filename); // Устанавливаем заголовок окна
+    sprintf(title,"%s - thashview 2.1", filename); // Устанавливаем заголовок окна
     begin_draw(); //Начинаем рисование интерфейса )
     sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // Создаём окно.
 
