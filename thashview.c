@@ -12,6 +12,8 @@
 #define TRUE 1;
 #define FALSE 0;
 #define MAX_HASH_LEN 65 // Максимальная длина строки
+#define WINDOW_W 665
+#define VERSION "%s - thashview 2.2"
 
 typedef unsigned char bool;
 struct kolibri_system_colors sys_color_table;
@@ -165,9 +167,9 @@ void sprint_hash(BYTE *hash, char* hash_str, int hash_size) //Преобрауем двоичны
 void redraw_window() //Рисуем окно
 {
     pos_t win_pos = get_mouse_pos(0); //Получаем позицию курсора мыши.
-    sprintf(title,"%s - thashview 2.1", filename); // Устанавливаем заголовок окна
+    sprintf(title,VERSION, filename); // Устанавливаем заголовок окна
     begin_draw(); //Начинаем рисование интерфейса )
-    sys_create_window(win_pos.x, win_pos.y, 665, 150, title, GREY, 0x14); // Создаём окно.
+    sys_create_window(win_pos.x, win_pos.y, WINDOW_W, 150, title, GREY, 0x14); // Создаём окно.
 
     draw_bar(10, 121, 525,20, WHITE); // Создаём прямоугольник для поля ввода
     draw_text_sys(edit_box_buff,15, 125, 0, 0x90000000| edit_box_text_color); // Выводим текст из буффера ввода
@@ -332,6 +334,11 @@ int main(int argc, char** argv)
     {
         notify_show("'File not found!' -E");
         exit(0);
+    }
+
+    if(GetScreenSize()/65536<WINDOW_W)
+    {
+        notify_show("'Low screen resolution! Program will not display correctrly!' -W");
     }
 
     int gui_event; // Перемная для хранения события

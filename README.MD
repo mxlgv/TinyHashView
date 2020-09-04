@@ -1,6 +1,6 @@
 # TinyHashView
 
-![Window screenshot](screen.png)
+![Window screenshot](img/screen.png)
 
 ### Description:
 
@@ -26,6 +26,12 @@
     
     build_kex_kossdk.bat   
     
+### Installation:
+
+**Download the latest release [here](https://github.com/turbocat2001/TinyHashView/releases/download/2.2/thashview-2.2.zip), unpack the archive. And run "SETUP.SH". After successful installation. You will be able to open files in the EOLITE menu.**
+
+![Window screenshot](img/eolite_menu.png)
+    
 ### Usage example:
 
 **Open the file with "thashview" in EOLITE or run it in "SHELL**
@@ -40,16 +46,16 @@
 - Implemented input field(Not full functionality).
 - Added "Compare" button to compare checksums.
 - Display notifications when copying, pasting, etc.
+- Added integration with EOLITE.
 
 ### My plans
  
 - Expand the functionality of the input field.
-- Add a dialog box to open a file. 
+- Add a dialog box to open a file (Questionable). 
 - Fix still undetected bugs. 
-- Integration with EOLITE (questionable).
 
 ### I thank
-- Maxim Kuzmitski (maxcodehack) for drawing the icon, helping with the design, and creating a makefile for building for Linux.
+- Maxim Kuzmitski (maxcodehack) for creating a makefile for building for Linux.
 - Rustem Gimadutdinov (rgimad) for testing and script creation for Windows.
 - Bopann Kostoev (Boppan) for finding bugs.
 
