@@ -28,7 +28,7 @@
     
 ### Installation:
 
-**Download the latest release [here](https://github.com/turbocat2001/TinyHashView/releases/download/2.2/thashview-2.2.zip), unpack the archive. And run "SETUP.SH". After successful installation. You will be able to open files in the EOLITE menu.**
+**Download the latest release [here](https://github.com/turbocat2001/TinyHashView/releases/download/2.2/thashview-2.2.zip), unpack the archive. And run "SETUP.SH". After successful installation, you will be able to open files in the EOLITE menu.**
 
 ![Window screenshot](img/eolite_menu.png)
     
