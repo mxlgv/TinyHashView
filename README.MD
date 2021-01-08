@@ -1,4 +1,6 @@
-# TinyHashView
+# TinyHashView(Hopelessly outdated!)
+
+** Development moved to: svn://kolibrios.org/programs/other/TinyHashView/
 
 ![Window screenshot](img/screen.png)
 
