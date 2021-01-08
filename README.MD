@@ -1,6 +1,6 @@
-# TinyHashView(Hopelessly outdated!)
+# TinyHashView (Hopelessly outdated!)
 
-** Development moved to: svn://kolibrios.org/programs/other/TinyHashView/
+**Development moved to: [KolibriOS SVN](svn://kolibrios.org/programs/other/TinyHashView/)
 
 ![Window screenshot](img/screen.png)
 
