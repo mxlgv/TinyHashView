@@ -1,5 +1,4 @@
 # TinyHashView (Hopelessly outdated!)
-
 **Development moved to: [KolibriOS SVN](svn://kolibrios.org/programs/other/TinyHashView/)
 
 ![Window screenshot](img/screen.png)
